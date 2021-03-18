@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./stylesheets/login.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
+      defer
+    ></script>
+    <script src="./javascripts/signup.js" defer></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="login-container">
+      <section class="login" id="login">
+        <header>
+          <h2>Varshil Gallery</h2>
+          <h4>Signup</h4>
+        </header>
+        <form id="form" class="login-form">
+          <input
+            id="fname"
+            class="login-input"
+            type="text"
+            placeholder="First Name"
+          />
+          <input
+            id="lname"
+            class="login-input"
+            type="text"
+            placeholder="Last Name"
+          />
+          <input
+            id="email"
+            class="login-input"
+            type="email"
+            placeholder="Email"
+          />
+          <input
+            id="mobile"
+            class="login-input"
+            type="text"
+            placeholder="Mobile"
+          />
+          <input
+            id="address"
+            class="login-input"
+            type="text"
+            placeholder="Address"
+          />
+          <input
+            id="password"
+            class="login-input"
+            type="password"
+            placeholder="Password"
+          />
+          <input
+            id="confirm_passoword"
+            class="login-input"
+            type="text"
+            placeholder="Confirm Password"
+          />
+          <div class="submit-container">
+            <button
+              onclick="location.href = '/'"
+              type="submit"
+              class="login-button"
+            >
+              Back
+            </button>
+            <button onclick="onsignup()" type="submit" class="login-button">
+              SIGN UP
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </body>
+</html>
