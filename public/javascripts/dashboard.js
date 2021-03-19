@@ -2,10 +2,6 @@ let file = [];
 const modal = document.getElementById("myModal");
 const modalImg = document.getElementById("img01");
 
-const onlogout = () => {
-  location.href = "/";
-};
-
 const onimgclick = (e) => {
   modal.style.display = "block";
   modalImg.src = e.src;
