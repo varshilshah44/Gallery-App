@@ -58,7 +58,7 @@ exports.login = async (req, res, next) => {
       "__v",
       "tokenExpire"
     );
-
+    req.session.login = true; 
     res.status(200).json({
       status: "success",
       user,

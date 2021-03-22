@@ -7,6 +7,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", (req, res, next) => {
+  delete req.session.login;
   res.render("login");
 });
 
@@ -15,49 +16,61 @@ router.get("/signup", (req, res, next) => {
 });
 
 router.get("/profile", async (req, res, next) => {
-  const user = await userDetails(req.query.userid);
-  res.render("profile", {
-    user: user,
-  });
+  if (req.session.login) {
+    const user = await userDetails(req.query.userid);
+    res.render("profile", {
+      user: user,
+    });
+  } else {
+    res.redirect("/");
+  }
 });
 
 router.get("/dashboard", async (req, res, next) => {
-  if (!req.query.isfavourite) {
-    const user = await userDetails(req.query.userid);
-    const media = await userMedia(req.query.userid, req.query.type);
-    res.render("dashboard", {
-      user: user,
-      media: media,
-      flag: 1,
-    });
+  if (req.session.login) {
+    if (!req.query.isfavourite) {
+      const user = await userDetails(req.query.userid);
+      const media = await userMedia(req.query.userid, req.query.type);
+      res.render("dashboard", {
+        user: user,
+        media: media,
+        flag: 1,
+      });
+    } else {
+      const user = await userDetails(req.query.userid);
+      const media = await userFavouriteMedia(req.query.userid, req.query.type);
+      res.render("dashboard", {
+        user: user,
+        media: media,
+        flag: 2,
+      });
+    }
   } else {
-    const user = await userDetails(req.query.userid);
-    const media = await userFavouriteMedia(req.query.userid, req.query.type);
-    res.render("dashboard", {
-      user: user,
-      media: media,
-      flag: 2,
-    });
+    res.redirect("/");
   }
 });
 
 router.get("/videos", async (req, res, next) => {
-  if (!req.query.isfavourite) {
-    const user = await userDetails(req.query.userid);
-    const media = await userMedia(req.query.userid, req.query.type);
-    res.render("videos", {
-      user: user,
-      media: media,
-      flag: 1,
-    });
+  if (req.session.login) {
+    if (!req.query.isfavourite) {
+      const user = await userDetails(req.query.userid);
+      const media = await userMedia(req.query.userid, req.query.type);
+      res.render("videos", {
+        user: user,
+        media: media,
+        flag: 1,
+      });
+    } else {
+      const user = await userDetails(req.query.userid);
+      const media = await userFavouriteMedia(req.query.userid, req.query.type);
+      res.render("videos", {
+        user: user,
+        media: media,
+        flag: 2,
+      });
+    }
   } else {
-    const user = await userDetails(req.query.userid);
-    const media = await userFavouriteMedia(req.query.userid, req.query.type);
-    res.render("videos", {
-      user: user,
-      media: media,
-      flag: 2,
-    });
+    res.redirect("/");
   }
 });
 
