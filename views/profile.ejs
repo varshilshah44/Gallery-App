@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./javascripts/profile.js" defer></script>
+</head>
+<body>
+    <%- include('header.ejs',{image:user.image})%>
+    <div class="col">                    
+        <div class="row">
+          <div class="col mb-3">
+            <div class="card">
+              <div class="card-body">
+                <div class="e-profile">
+                  <div class="row">
+                    <div class="col-12 col-sm-auto mb-3">
+                      <div class="mx-auto" style="width: 140px;">
+                        <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
+                          <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">
+                            <% if(!user.image){ %>
+                            <img style="height:140px; border-radius:25px;" src="./images/user.jpg"/>
+                            <% }
+                            else { %>
+                            <img style="height:140px; border-radius:25px;" src="https://varshilgallerybucket.s3.ap-south-1.amazonaws.com/user/<%= user.image %>"/>
+                            <% } %>    
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                      <div class="text-center text-sm-left mb-2 mb-sm-0">
+                        <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"><%= user.firstName %> <%= user.lastName %> </h4>
+                        <div class="mt-2">
+                          <input onchange="onfilechoose(this)" id="file" type="file"><br><br>
+                          <button onclick="onchangephoto('<%= user._id %>')" class="btn btn-primary" type="button">
+                            <i class="fa fa-fw fa-camera"></i>
+                            <span>Change Photo</span></button>
+                            <% if(user.image) { %>
+                            <button onclick="onremovephoto('<%= user._id %>')" class="btn btn-primary" type="button">
+                              <i class="fa fa-fw fa-camera"></i>
+                              <span>Remove Photo</span></button>
+                            <% } %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-content pt-3">
+                    <div class="tab-pane active">
+                      <form class="form" novalidate="">
+                        <div class="row">
+                          <div class="col">
+                            <div class="row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>First Name</label>
+                                  <input class="form-control" type="text" id="fname" name="name" value="<%= user.firstName %>">
+                                </div>
+                              </div>
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>Last Name</label>
+                                  <input class="form-control" type="text" id="lname" name="username" value="<%= user.lastName %>">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>Email</label>
+                                  <input class="form-control" id="email" type="text" value="<%= user.email %>">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>Mobile</label>
+                                  <input class="form-control" id="mobile" type="text" value="<%= user.mobile %>">
+                                </div>
+                              </div>
+                            </div>
+                          
+                            <div class="row">
+                              <div class="col mb-3">
+                                <div class="form-group">
+                                  <label>Address</label>
+                                  <textarea class="form-control" id="address" rows="5"><%= user.address %></textarea>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col d-flex justify-content-end">
+                            <button onclick="onsave('<%= user._id %>')" class="btn btn-primary" type="button">Save Changes</button>
+                          </div>
+                        </div>
+                      </form>
+    
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+      </div>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./javascripts/dashboard.js" defer></script>
+    <title>Catalog-Z Bootstrap 5.0 HTML Template</title>
+    <link rel="stylesheet" href="./stylesheets/button.css" />
+  </head>
+  <style>
+    .buttonn {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    width:313px;
+  }
+  
+  .button1 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #4CAF50;
+  }
+  
+  .button1:hover {
+    background-color: #3399cc;
+    color: white;
+  }
+
+  #uploading{
+    display:none;
+  }
+  
+    </style>
+  <body>
+    <%- include('header.ejs',{image:user.image})%>
+    <% if (flag === 1) { %>
+        <button onclick="document.getElementById('file').value = ''" class="button" data-toggle="modal" data-target="#exampleModal3">
+          <span>Add</span>
+        </button>
+        <button onclick="viewfavourite('video','videos')" style="width:200px;" class="button">
+            <span>Favourites</span>
+        </button>
+        <% } 
+        else { %>
+        <button onclick="onback('video','videos')" style="width:200px;" class="button">
+                <span>Back</span>
+        </button>
+    <% } %>     
+    <div id="allmedia" class="container-fluid tm-container-content tm-mt-60">
+        <div class="row tm-mb-90 tm-gallery">
+          <% if(media.length > 0) { media.forEach(el => { %>
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+            <figure class="effect-ming tm-video-item">
+                <video class="img-fluid"  style="height:250px; width:320px;" controls>
+                    <source src="https://varshilgallerybucket.s3.ap-south-1.amazonaws.com/media/<%= el.url %>">
+                </video>
+                  <% if(flag === 1){ %>
+                    <button onclick="onfavourite('<%= el._id %>')"  class="buttonn button1">Add to favourite</button>
+                    <% } 
+                    else {  %>
+                    <button onclick="onremovefavourite('<%= el._id %>','video','videos')"  class="buttonn button1">Remove from favourite</button>
+                    <% } %>    
+                    <button onclick="onmediadelete('<%= el._id %>','video','videos')"  class="buttonn button1">Remove</button>           
+          </figure>
+          </div>
+          <% }) } else{ %>
+  
+        <div style="text-align: center">
+          <img
+            src="https://thumbs.dreamstime.com/b/no-found-symbol-unsuccessful-search-vecotr-upset-magnifying-glass-cute-not-zoom-icon-suitable-results-oops-page-failure-122786031.jpg"
+            height="200px"
+            width="300px"
+          />
+          <h3 style="text-align: center">there is no videos</h3>
+        </div>
+        <% } %>
+      </div>
+      </div>
+      <div
+      class="modal fade"
+      id="exampleModal3"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModal3Label"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModal3Label">Add Video</h5>
+          </div>
+          <div class="modal-body">
+            <input id="file" name="image" onchange="onchoosefile(this)" type="file" multiple/>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              onclick="onaddmedia('video','videos')"
+              type="submit"
+              style="background-color: #3399cc"
+              class="btn btn-primary"
+            >
+              Save
+            </button>
+            <label id="uploading">Uploading...</label>
+          </div>
+        </div>
+      </div>
+      </form>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./stylesheets/login.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
+      defer
+    ></script>
+    <script src="./javascripts/index.js" defer></script>
+    <title>Document</title>
+   </head>
+  <body onload="onload()">
+    <div class="login-container">
+      <section class="login" id="login">
+        <header>
+          <h2>Varshil Gallery</h2>
+          <h4>Login</h4>
+        </header>
+        <form id="form" class="login-form">
+          <input
+            id="email"
+            type="text"
+            class="login-input"
+            placeholder="Email"
+            required
+            autofocus
+          />
+          <input
+            id="password"
+            type="password"
+            class="login-input"
+            placeholder="Password"
+            required
+          />
+          <div class="submit-container">
+            <button onclick="onlogin()" type="submit" class="login-button">
+              SIGN IN
+            </button>
+            <button onclick="onSignup()"  class="login-button">
+              SIGN UP
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </body>
+</html>
