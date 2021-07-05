@@ -37,7 +37,7 @@ app.use(function(err, req, res, next) {
     err.status = err.status || 500;
     err.message = err.message || 'Something went Wrong' 
     res.json({
-      status:'failed',
+      status:'failedddddddd',
       message:err.message
     })
 });
